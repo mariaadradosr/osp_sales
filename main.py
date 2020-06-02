@@ -3,9 +3,9 @@ import pandas as pd
 import datetime 
 import numpy as np
 
-osp_migras_path = './input/CdM_Pospago.xlsx'
-osp_daily_path = './input/daily.xlsx'
-jz_path = './input/daily_jazztel.xlsx'
+osp_migras_path = './input/migras.xlsx'
+osp_daily_path = './input/orange.xlsx'
+jz_path = './input/jazztel.xlsx'
 output_path = './output/'
 
 
