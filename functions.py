@@ -38,7 +38,7 @@ def daily(path,sheet = 'FBB Convergencia', row = 0, name = 'column_name'):
 
 def jazztel(path):
     # Total FBB sin cambio de domicilio + FBB cambio domicilio + total ventas móvil
-    df = pd.read_excel(path, sheet_name= 'Mix_Squad').reset_index().loc[[0,25,61]]
+    df = pd.read_excel(path, sheet_name= 'Mix_Squad').reset_index().loc[[0,26,62]]
     cols_tot = list(df.columns)
     cols = []
     for col in cols_tot: 
