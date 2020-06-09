@@ -47,6 +47,6 @@ def jazztel(path):
     resultado = df[cols].T
     # resultado.rename(columns= {0:'fbb_s_cdom',25:'fbb_cdom',61:'mov'}, inplace=True)
     resultado['jazztel']= resultado.iloc[:,0:3].sum(axis=1)
-    resultado.drop(columns = [0,25,61],inplace= True)
+    resultado.drop(columns = [0,26,62],inplace= True)
     return resultado
     
