@@ -14,7 +14,7 @@ diccionario_orange = {
                      8: 'mov_conv_2as_lineas',
                      11: 'mov_conv_doble_capta',
                      14: 'mov_conv_x_sell',
-                     17: 'ampliaciones'
+                     17: 'mov_conv_ampliaciones'
                  }],
     'mov_only': ['Mobile Only',
                  {
