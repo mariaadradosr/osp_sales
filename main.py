@@ -26,9 +26,9 @@ def main():
     mov_on = functions.daily(xls, sheet='Mobile Only',
                              row=0, name='osp_mov_only')
     amena_fbb = functions.daily(
-        xls, sheet='FBB AMENA', row=10, name='amena_fbb')
+        xls, sheet='Mix canal Amena', row=0, name='amena_fbb')
     amena_mov = functions.daily(
-        xls, sheet='Total Móvil', row=8, name='amena_mov')
+        xls, sheet='Mix canal Amena', row=25, name='amena_mov')
     osp_mig = functions.migras(osp_migras_path)
     jazztel = functions.jazztel(jz_path)
     orange = pd.concat([fbb_co, fbb_sa, mov_co, mov_on,
@@ -38,6 +38,7 @@ def main():
     amena = pd.concat([amena_fbb, amena_mov], axis=1, sort=False).fillna(0)
     amena['amena'] = amena.iloc[:, 0]+amena.iloc[:, 1]
     ventas = pd.concat([orange, jazztel, amena], axis=1, sort=False).fillna(0)
+    # ventas = pd.concat([orange, jazztel], axis=1, sort=False).fillna(0)
     ventas.index = pd.to_datetime(ventas.index)
     ventas.index = ventas.asfreq('d').index
     semanas = ventas.index.to_series().dt.week
@@ -77,10 +78,12 @@ def main():
     total_osp['fecha_semana'] = total_osp['index'] - total_osp.timedelta
 
     total_osp.drop(columns=['dia_semana', 'timedelta'], inplace=True)
+    final_0 = total_osp.groupby(by=['fecha_semana']).sum().reset_index()
+    final = pd.melt(final_0,id_vars=["fecha_semana"],var_name="variables",value_name = 'total')
 
-    total_osp.to_csv(
-        f'{output_path}total_orange_{datetime.date.today().strftime("%d%m%y")}.csv', decimal=",", encoding='CP1252', index=False)
-    total_osp.to_csv(f'{output_path}total_orange.csv',
+    # final.to_csv(
+    #     f'{output_path}total_orange_{datetime.date.today().strftime("%d%m%y")}.csv', decimal=",", encoding='CP1252', index=False)
+    final.to_csv(f'{output_path}total_orange.csv',
                      decimal=",", encoding='CP1252', index=False)
 
 
