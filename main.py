@@ -85,6 +85,8 @@ def main():
     #     f'{output_path}total_orange_{datetime.date.today().strftime("%d%m%y")}.csv', decimal=",", encoding='CP1252', index=False)
     final.to_csv(f'{output_path}total_orange.csv',
                      decimal=",", encoding='CP1252', index=False)
+    total_osp.to_csv(f'{output_path}total_orange.csv',
+                     decimal=",", encoding='CP1252', index=False)
 
 
 if __name__ == "__main__":
