@@ -4,8 +4,18 @@ import pandas as pd
 import datetime
 import numpy as np
 import constantes
+from pathlib import Path
+import os
+import re
 
-osp_migras_path = './input/migras.xlsx'
+input_path = './input/'
+paths = sorted(Path(input_path).iterdir(), key=os.path.getmtime,reverse=True)
+migras_file = [path.name for path in paths if re.search('Pospago',path.name)][0]
+
+osp_migras_path = './input/'+migras_file
+
+print(migras_file)
+
 osp_daily_path = './input/orange.xlsx'
 jz_path = './input/jazztel.xlsx'
 output_path = './output/'
