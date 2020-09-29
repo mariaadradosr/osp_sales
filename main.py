@@ -7,26 +7,31 @@ import constantes
 from pathlib import Path
 import os
 import re
+from os import listdir
 
 input_path = './input/'
-paths = sorted(Path(input_path).iterdir(), key=os.path.getmtime,reverse=True)
-migras_file = [path.name for path in paths if re.search('Pospago',path.name)][0]
-
+paths = sorted(Path(input_path).iterdir(), key=os.path.getmtime, reverse=True)
+migras_file = [path.name for path in paths if re.search(
+    'Pospago', path.name)][0]
 osp_migras_path = './input/'+migras_file
 
-print(migras_file)
+print('\nArchivo migraciones OSP ----->', migras_file, '\n')
 
-osp_daily_path = './input/orange.xlsx'
-jz_path = './input/jazztel.xlsx'
+osp_daily_path = './input/' + \
+    [file for file in listdir(input_path) if re.search('range', file)][0]
+jz_path = './input/' + \
+    [file for file in listdir(input_path) if re.search('azztel', file)][0]
 output_path = './output/'
 
-print('loading OSP DB')
+print('Cargando base OSP ----->',osp_daily_path)
 xls = pd.ExcelFile(osp_daily_path)
-print('OSP DB loaded')
-
+# xls = pd.read_excel(osp_daily_path,
+#                     sheet_name=['FBB Stand Alone', 'FBB Convergencia',
+#                                 'Móvil Convergencia', 'Mobile Only', 'Mix canal Amena','Mix canal Osp'],
+#                     engine='pyxlsb')
 
 def main():
-    print("Generando documento ......\n")
+    print("\nGenerando documento ventas + migras por marca ......\n")
     fbb_sa = functions.daily(xls, sheet='FBB Stand Alone',
                              row=0, name='osp_fbb_stand_alone')
     fbb_co = functions.daily(
@@ -67,7 +72,8 @@ def main():
     merge.to_csv(f'{output_path}ventas.csv', decimal=",", encoding='CP1252')
     print(
         f'Archivo guardado [{output_path}ventas_{datetime.date.today().strftime("%d%m%y")}.csv]')
-
+    
+    print('\nGenerando archivo ventas detalle OSP\n')
     fbb_conv = functions.deepDaily(
         xls, 'fbb_conv', constantes.diccionario_orange)
     fbb_only = functions.deepDaily(
@@ -89,14 +95,15 @@ def main():
 
     total_osp.drop(columns=['dia_semana', 'timedelta'], inplace=True)
     final_0 = total_osp.groupby(by=['fecha_semana']).sum().reset_index()
-    final = pd.melt(final_0,id_vars=["fecha_semana"],var_name="variables",value_name = 'total')
+    final = pd.melt(final_0, id_vars=[
+                    "fecha_semana"], var_name="variables", value_name='total')
 
     # final.to_csv(
     #     f'{output_path}total_orange_{datetime.date.today().strftime("%d%m%y")}.csv', decimal=",", encoding='CP1252', index=False)
     final.to_csv(f'{output_path}total_orange.csv',
-                     decimal=",", encoding='CP1252', index=False)
-    total_osp.to_csv(f'{output_path}total_orange.csv',
-                     decimal=",", encoding='CP1252', index=False)
+                 decimal=",", encoding='CP1252', index=False)
+    # total_osp.to_csv(f'{output_path}total_orange.csv',
+    #                  decimal=",", encoding='CP1252', index=False)
 
 
 if __name__ == "__main__":

@@ -40,6 +40,16 @@ def daily(xls, sheet='FBB Convergencia', row=0, name='column_name'):
     resultado.rename(columns={row: name}, inplace=True)
     return resultado
 
+# def daily(xls, sheet='FBB Convergencia', row=0, name='column_name'):
+#     df = xls[sheet]
+#     cols_tot = list(df.columns)
+#     cols = []
+#     for col in cols_tot:
+#         if type(col) == datetime.datetime and col >= datetime.datetime.strptime('2016-05-01 00:00:00', '%Y-%m-%d %H:%M:%S'):
+#             cols.append(col)
+#     resultado = df[cols].iloc[[row]].T
+#     resultado.rename(columns={row: name}, inplace=True)
+#     return resultado
 
 def jazztel(path):
     # Total FBB sin cambio de domicilio + FBB cambio domicilio + total ventas móvil
@@ -59,6 +69,7 @@ def jazztel(path):
 
 def deepDaily(xls, name, dic):
     df = pd.read_excel(xls, sheet_name=dic[name][0])
+    # df = xls[dic[name][0]]
     cols = []
     cols_tot = list(df.columns)
     for col in cols_tot:
