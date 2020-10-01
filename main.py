@@ -89,14 +89,16 @@ def main():
 
     total_osp.reset_index(inplace=True)
     total_osp['dia_semana'] = total_osp['index'].dt.weekday
+    total_osp['year'] = total_osp['index'].dt.year
+    total_osp['month'] = total_osp['index'].dt.month
     total_osp['timedelta'] = total_osp.dia_semana.apply(
         lambda x: pd.Timedelta(days=x))
     total_osp['fecha_semana'] = total_osp['index'] - total_osp.timedelta
 
     total_osp.drop(columns=['dia_semana', 'timedelta'], inplace=True)
-    final_0 = total_osp.groupby(by=['fecha_semana']).sum().reset_index()
+    final_0 = total_osp.groupby(by=['fecha_semana','year','month']).sum().reset_index()
     final = pd.melt(final_0, id_vars=[
-                    "fecha_semana"], var_name="variables", value_name='total')
+                    'fecha_semana','year','month'], var_name="variables", value_name='total')
 
     # final.to_csv(
     #     f'{output_path}total_orange_{datetime.date.today().strftime("%d%m%y")}.csv', decimal=",", encoding='CP1252', index=False)
@@ -105,6 +107,22 @@ def main():
     # total_osp.to_csv(f'{output_path}total_orange.csv',
     #                  decimal=",", encoding='CP1252', index=False)
 
+    print('\nGenerando archivo ventas detalle Jazztel\n')
+    mix_squad = functions.deepDaily(jz_path,'mix_squad',constantes.diccionario_orange).fillna(0)
+    mix_squad.reset_index(inplace=True)
+    mix_squad['dia_semana'] = mix_squad['index'].dt.weekday
+    mix_squad['year'] = mix_squad['index'].dt.year
+    mix_squad['month'] = mix_squad['index'].dt.month
+    mix_squad['timedelta'] = mix_squad.dia_semana.apply(
+        lambda x: pd.Timedelta(days=x))
+    mix_squad['fecha_semana'] = mix_squad['index'] - mix_squad.timedelta
+    mix_squad.drop(columns=['dia_semana', 'timedelta'], inplace=True)
+    final_squad_0 = mix_squad.groupby(by=['fecha_semana','year','month']).sum().reset_index()
+    final_squad = pd.melt(final_squad_0, id_vars=[
+                    'fecha_semana','year','month'], var_name="variables", value_name='total')
+
+    final_squad.to_csv(f'{output_path}total_jazztel.csv',
+                 decimal=",", encoding='CP1252', index=False)
 
 if __name__ == "__main__":
     main()
