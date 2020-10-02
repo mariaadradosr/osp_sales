@@ -99,3 +99,10 @@ diccionario_orange = {
                       93: 'mov_resto'
                   }]
 }
+
+
+migras_base = {
+    "fecha_semana":[],
+    "migras":[],
+    "file":[]
+}

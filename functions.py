@@ -17,6 +17,23 @@ def migras(path):
                               [0]: 'migras'}, inplace=True)
     return resultado
 
+
+def migras_new(path,file):
+    df = pd.read_excel(path, sheet_name='RESUMEN MKT', header=2).reset_index()
+    df_mig = df.loc[[df[(df['Unnamed: 2'] == 'MIGRAS x CANAL') | (
+        df['Unnamed: 2'] == 'MIGRACIONES x CANAL')].index[0]+4]]
+    cols_tot = list(df_mig.columns)
+    cols = []
+    for col in cols_tot:
+        if type(col) == datetime.datetime:
+            cols.append(col)
+    resultado = df_mig[cols].iloc[[0]].T.reset_index()
+    resultado.rename(columns={list(resultado.columns)[0]: 'fecha_dia',
+                              list(resultado.columns)[1]: 'migras'
+                             }, inplace=True)
+    resultado['file'] = file
+    return resultado
+
 # def daily(path,sheet = 'FBB Convergencia'):
 #     df = pd.read_excel(path, sheet_name= sheet).reset_index()
 #     cols_tot = list(df.columns)
@@ -78,3 +95,20 @@ def deepDaily(xls, name, dic):
     resultado = df[cols].iloc[list(dic[name][1].keys())].T
     resultado.rename(columns=dic[name][1], inplace=True)
     return resultado
+
+
+
+def comparaCampoMigras(row):
+    if (row['migras_x'] == row['migras_y']):
+        return row['migras_x']
+    elif (row['migras_x'] != row['migras_y']) & (row['migras_y'] != 0):
+        return row['migras_y']
+    elif  (row['migras_x'] != row['migras_y']) & (row['migras_y'] == 0):
+        return row['migras_x']
+def comparaCampoMigrasFile(row):
+    if (row['migras_x'] == row['migras_y']):
+        return row['file_x']
+    elif (row['migras_x'] != row['migras_y']) & (row['migras_y'] != 0):
+        return row['file_y']
+    elif  (row['migras_x'] != row['migras_y']) & (row['migras_y'] == 0):
+        return row['file_x']
