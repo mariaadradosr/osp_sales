@@ -110,7 +110,7 @@ def main():
                  decimal=",", encoding='CP1252', index=False)
     # total_osp.to_csv(f'{output_path}total_orange.csv',
     #                  decimal=",", encoding='CP1252', index=False)
-
+    print('Done')
     print('\nGenerando archivo ventas detalle Jazztel\n')
     mix_squad = functions.deepDaily(jz_path,'mix_squad',constantes.diccionario_orange).fillna(0)
     mix_squad.reset_index(inplace=True)
@@ -127,6 +127,6 @@ def main():
 
     final_squad.to_csv(f'{output_path}total_jazztel.csv',
                  decimal=",", encoding='CP1252', index=False)
-
+    print('Done')
 if __name__ == "__main__":
     main()
