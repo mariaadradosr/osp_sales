@@ -28,7 +28,7 @@ def migras():
 
     base_files = list(migras_df.file.unique())
     to_add = [f for f in saved_files if f not in base_files]
-
+    print('\nFiles in base:\n',base_files)
     print('\nFiles to add:\n',to_add)
 
     for f in to_add:
