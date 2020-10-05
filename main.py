@@ -71,9 +71,9 @@ def main():
     s = s.reindex(idx, fill_value=np.nan).ffill().astype('int64')
     s.index.name = 'fecha'
     merge = pd.merge(ventas, s, how='left', left_index=True, right_index=True)
-    merge.to_csv(f'{output_path}ventas_{datetime.date.today().strftime("%d%m%y")}.csv',
+    merge.to_csv(f'{output_path}ventas/ventas_{datetime.date.today().strftime("%d%m%y")}.csv',
                  decimal=",", encoding='CP1252')
-    merge.to_csv(f'{output_path}ventas.csv', decimal=",", encoding='CP1252')
+    merge.to_csv(f'{output_path}ventas/ventas.csv', decimal=",", encoding='CP1252')
     print(
         f'Archivo guardado [{output_path}ventas_{datetime.date.today().strftime("%d%m%y")}.csv]')
     
