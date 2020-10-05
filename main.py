@@ -106,7 +106,7 @@ def main():
 
     # final.to_csv(
     #     f'{output_path}total_orange_{datetime.date.today().strftime("%d%m%y")}.csv', decimal=",", encoding='CP1252', index=False)
-    final.to_csv(f'{output_path}total_orange.csv',
+    final.to_csv(f'{output_path}ventas/total_orange.csv',
                  decimal=",", encoding='CP1252', index=False)
     # total_osp.to_csv(f'{output_path}total_orange.csv',
     #                  decimal=",", encoding='CP1252', index=False)
@@ -125,7 +125,7 @@ def main():
     final_squad = pd.melt(final_squad_0, id_vars=[
                     'fecha_semana','year','month'], var_name="variables", value_name='total')
 
-    final_squad.to_csv(f'{output_path}total_jazztel.csv',
+    final_squad.to_csv(f'{output_path}ventas/total_jazztel.csv',
                  decimal=",", encoding='CP1252', index=False)
     print('Done')
 if __name__ == "__main__":
