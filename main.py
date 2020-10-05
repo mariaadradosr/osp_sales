@@ -10,12 +10,11 @@ import re
 from os import listdir
 
 input_path = './input/'
-paths = sorted(Path(input_path).iterdir(), key=os.path.getmtime, reverse=True)
-migras_file = [path.name for path in paths if re.search(
-    'Pospago', path.name)][0]
-osp_migras_path = './input/'+migras_file
-
-print('\nArchivo migraciones OSP ----->', migras_file, '\n')
+# paths = sorted(Path(input_path).iterdir(), key=os.path.getmtime, reverse=True)
+# migras_file = [path.name for path in paths if re.search(
+#     'Pospago', path.name)][0]
+# osp_migras_path = './input/'+migras_file
+# print('\nArchivo migraciones OSP ----->', migras_file, '\n')
 
 osp_daily_path = './input/' + \
     [file for file in listdir(input_path) if re.search('range', file)][0]
@@ -44,7 +43,12 @@ def main():
         xls, sheet='Mix canal Amena', row=0, name='amena_fbb')
     amena_mov = functions.daily(
         xls, sheet='Mix canal Amena', row=25, name='amena_mov')
-    osp_mig = functions.migras(osp_migras_path)
+    # osp_mig = functions.migras(osp_migras_path)
+    migras_df = pd.read_csv(output_path+'migras/'+'migras.csv',sep=',',decimal=',',encoding='CP1252')
+    migras_df.fecha_dia = pd.to_datetime(migras_df.fecha_dia)
+    migras_df.set_index('fecha_dia',inplace=True)
+    migras_df = migras_df.astype({'migras':'float64'})
+    osp_mig = migras_df[['migras']]
     jazztel = functions.jazztel(jz_path)
     orange = pd.concat([fbb_co, fbb_sa, mov_co, mov_on,
                         osp_mig], axis=1, sort=False).fillna(0)
