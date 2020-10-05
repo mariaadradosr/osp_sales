@@ -105,10 +105,16 @@ def comparaCampoMigras(row):
         return row['migras_y']
     elif  (row['migras_x'] != row['migras_y']) & (row['migras_y'] == 0):
         return row['migras_x']
+    elif  (row['migras_x'] != row['migras_y']) & (row['migras_x'] == 0):
+        return row['migras_y']
 def comparaCampoMigrasFile(row):
-    if (row['migras_x'] == row['migras_y']):
+    if (row['migras_x'] == row['migras_y']) & (row['file_x'] != 0):
         return row['file_x']
+    elif (row['migras_x'] == row['migras_y']) & (row['file_x'] == 0):
+        return row['file_y']
     elif (row['migras_x'] != row['migras_y']) & (row['migras_y'] != 0):
         return row['file_y']
     elif  (row['migras_x'] != row['migras_y']) & (row['migras_y'] == 0):
         return row['file_x']
+    elif  (row['migras_x'] != row['migras_y']) & (row['migras_x'] == 0):
+        return row['file_y']
