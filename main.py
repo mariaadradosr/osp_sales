@@ -64,7 +64,8 @@ def main():
     # ventas.index = ventas.asfreq('d').index
     ventas.index.name = 'fecha'
 
-    ventas['semana'] = ventas.index.to_series().dt.week
+    # ventas['semana'] = ventas.index.to_series().dt.week
+    ventas['semana'] = ventas.index.to_series().dt.isocalendar().week
     ventas['fecha_dia'] = ventas.index
     ventas['dia_semana'] = ventas.fecha_dia.dt.weekday
     ventas['timedelta'] = ventas.dia_semana.apply(
