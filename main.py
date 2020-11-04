@@ -9,7 +9,7 @@ import os
 import re
 from os import listdir
 
-# guardado de prubea
+# guardado de prueba 2
 
 input_path = './input/'
 # paths = sorted(Path(input_path).iterdir(), key=os.path.getmtime, reverse=True)
