@@ -9,6 +9,8 @@ import os
 import re
 from os import listdir
 
+# guardado de prubea
+
 input_path = './input/'
 # paths = sorted(Path(input_path).iterdir(), key=os.path.getmtime, reverse=True)
 # migras_file = [path.name for path in paths if re.search(
