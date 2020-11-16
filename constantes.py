@@ -1,4 +1,17 @@
 diccionario_orange = {
+    'total_orange':['Orange',
+             {
+                 3:'osp_fbb_convergencia',
+                 9:'osp_fbb_stand_alone',
+                 46:'osp_mov_convergencia',
+                 64:'osp_mov_only',
+                 44:'LTE'
+                 }],
+    'total_amena':['Mix canal Amena',
+            {
+                0:'amena_fbb',
+                26:'amena_mov'
+            }],
     'fbb_conv': ['FBB Convergencia',
                  {
                      4: 'fbb_conv_doble_capta',
@@ -98,7 +111,47 @@ diccionario_orange = {
                       97: 'mov_retencion_voluntarias',
                       98: 'mov_retencion_portabilidad',
                       100: 'mov_resto'
-                  }]
+                  }],
+    'mix_orange_2':[
+        'Mix canal Osp',
+        {
+        2: 'mix_fbb_eshop_online',
+        3: 'mix_fbb_eshop_distributors',
+        4: 'mix_fbb_operations_total',
+        5: 'mix_fbb_other_total',
+        7: 'mix_fbb_retail_alternative',
+        8: 'mix_fbb_retail_dho',
+        9: 'mix_fbb_retail_exclusive',
+        10: 'mix_fbb_retail_frc',
+        11: 'mix_fbb_retail_non_excl_eci',
+        12: 'mix_fbb_retail_non_excl_others',
+        13: 'mix_fbb_retail_non_excl_ggss',
+        14: 'mix_fbb_retail_non_exclusibe_tph',
+        15: 'mix_fbb_retail_others',
+        16: 'mix_fbb_retail_ttpp',
+        17: 'mix_fbb_telesales_in',
+        18: 'mix_fbb_telesales_out',
+        19: 'mix_fbb_teleweb_total',
+        28: 'mix_mov_eshop_online',
+        29: 'mix_mov_eshop_distributors',
+        30: 'mix_mov_operations_total',
+        31: 'mix_mov_other_total',
+        33: 'mix_mov_retail_alternative',
+        34: 'mix_mov_retail_dho',
+        35: 'mix_mov_retail_exclusive',
+        36: 'mix_mov_retail_frc',
+        37: 'mix_mov_retail_non_excl_eci',
+        38: 'mix_mov_retail_non_excl_others',
+        39: 'mix_mov_retail_non_excl_ggss',
+        40: 'mix_mov_retail_non_exclusibe_tph',
+        41: 'mix_mov_retail_others',
+        42: 'mix_mov_retail_ttpp',
+        43: 'mix_mov_telesales_in',
+        44: 'mix_mov_telesales_out',
+        45: 'mix_mov_teleweb_total',
+
+        }
+    ]
 }
 
 
