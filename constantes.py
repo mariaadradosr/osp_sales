@@ -3,9 +3,9 @@ diccionario_orange = {
              {
                  3:'osp_fbb_convergencia',
                  9:'osp_fbb_stand_alone',
-                 46:'osp_mov_convergencia',
-                 64:'osp_mov_only',
-                 44:'LTE'
+                 49:'osp_mov_convergencia',
+                 67:'osp_mov_only',
+                 47:'LTE'
                  }],
     'total_amena':['Mix canal Amena',
             {
